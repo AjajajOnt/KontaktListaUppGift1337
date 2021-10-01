@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace KontaktListaUppGift1337
 {
@@ -6,6 +7,10 @@ namespace KontaktListaUppGift1337
     {
         static void Main(string[] args)
         {
+            
+
+
+
             Console.WriteLine("Hello World!");
         }
     }
