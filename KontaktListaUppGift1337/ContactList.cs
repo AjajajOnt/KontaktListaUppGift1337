@@ -19,24 +19,33 @@ namespace KontaktListaUppGift1337
         internal void start()
         {
 
+            MenyDesign("Enter name");
             Person newPerson = new Person();
             newPerson.name = Console.ReadLine();
+            MenyDesign("Enter Lastname");
             newPerson.lastname = Console.ReadLine();
-            newPerson.favoritAnimal = Console.ReadLine();
+            
             persons.Add(newPerson);
-
-
-
         }
 
         private void PrintPerson()
         {
             foreach (var person in persons)
             {
-                Console.WriteLine(person.name + "  " + person.lastname + "  " + person.favoritAnimal);
+                MenyDesign(person.name + "  " + person.lastname + "  " + person.favoritAnimal);
 
             }
         }
 
+        internal void MenyDesign(string text)
+        {
+
+            Console.WriteLine("--------------------------------------");
+            Console.WriteLine("(" + text + ")");
+            Console.WriteLine("--------------------------------------");
+        }
+
+
     }
+
 }
