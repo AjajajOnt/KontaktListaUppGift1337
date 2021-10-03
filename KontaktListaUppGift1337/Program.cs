@@ -3,15 +3,36 @@ using System.Collections.Generic;
 
 namespace KontaktListaUppGift1337
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
+
+            ContactList ccl = new ContactList();
+
             
 
+        }
 
 
-            Console.WriteLine("Hello World!");
+
+
+
+
+
+
+
+
+
+
+
+
+        private static void MenyDesign(string text)
+        {
+            
+            Console.WriteLine("--------------------------------------");
+            Console.WriteLine("(              " +  text+"                  )");
+            Console.WriteLine("--------------------------------------");
         }
     }
 }

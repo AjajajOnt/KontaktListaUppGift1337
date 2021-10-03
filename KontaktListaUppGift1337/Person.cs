@@ -8,23 +8,28 @@ namespace KontaktListaUppGift1337
 {
     public class Person
     {
-        public string Name;
-        public string Lastname;
-        public string Alias;
-        public int age;
-        public int DateOfBirth;
-        public string EmailAddress1;
-        public string LinkedInProfile;
-        public string FacebookProfile;
-        public string InstagramProfile;
-        public string TwitterProfile;
-        public string GithubSite;
-        public string FavoriteFood;
-        public string FavoritAnimal;
-        public string FavoriteMovieGenre;
-        public string FavoriteMovie;
-        public bool Blocked = false;
-        public bool Ghosted = false;
+
+
+        public string name { get; set; }
+        public string lastname { get; set; }
+        public string alias { get; set; }
+        public int age { get; set; }
+        public DateTime dateOfBirth { get; set; }
+        public string emailAddress1 { get; set; }
+        public string linkedInProfile { get; set; }
+        public string facebookProfile { get; set; }
+        public string instagramProfile { get; set; }
+        public string twitterProfile { get; set; }
+        public string steamProfile { get; set; }
+        public string githubSite { get; set; }
+        public string favoriteFood { get; set; }
+        public string favoritAnimal { get; set; }
+        public string favoriteMovieGenre { get; set; }
+        public string favoriteMovie{ get; set; }
+        public string Name { get; internal set; }
+
+        public bool blocked = false;
+        public bool ghosted = false;
 
     }
 }
