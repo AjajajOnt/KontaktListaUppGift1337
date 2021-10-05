@@ -18,6 +18,26 @@ namespace KontaktListaUppGift1337
                 {
                     ccl.start();
                 }
+                else if (MenuChoice == 2)
+                {
+
+                }
+                else if (MenuChoice == 3)
+                {
+
+                }
+                else if(MenuChoice == 4)
+                {
+                    ccl.PrintPersonDelete();
+
+
+                }
+                else if(MenuChoice == 5)
+                {
+                    ccl.PrintPerson();
+
+                }
+
 
 
             } while (MenuChoice > 0 || MenuChoice <= 5  );
