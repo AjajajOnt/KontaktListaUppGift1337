@@ -63,8 +63,22 @@ namespace KontaktListaUppGift1337
             MenyDesign("To update a certain contact enter 3");
             MenyDesign("To delete a contact enter 4");
             MenyDesign("To list everyone in your contacts enter 5");
-            MenuChoice = int.Parse(Console.ReadLine());
-            return MenuChoice;
+            try 
+            {
+
+
+                MenuChoice = int.Parse(Console.ReadLine());
+                return MenuChoice;
+            }
+            catch (Exception)
+            {
+                MenuChoice = 0;
+                return MenuChoice;
+
+            }
+        
+
+            
         }
 
         private static void MenyDesign(string Text)

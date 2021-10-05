@@ -28,18 +28,24 @@ namespace KontaktListaUppGift1337
             String Input = "";
             String Input2 = "";
             PropertyInfo[] Properties = typeof(Person).GetProperties();
-            MenyDesign("Do you want to add more information?");
+            MenyDesign("Do you want to add more information? (Y/N)" );
             Input = Console.ReadLine();
-            if (Input.ToUpper() == "YES")
+            if (Input.ToUpper() == "YES" || Input.ToUpper() == "Y" || Input.ToUpper() == "ye")
             {
-                MenyDesign("Do you want to add something specific or everything? Write specific or everything as your answer.");
+                MenyDesign("Do you want to add something specific or everything? Enter specific or everything as your answer.");
                 Input = Console.ReadLine();
+                Console.Clear();
                 if (Input.ToUpper() == "SPECIFIC")
                 {
                     Console.Clear();
-                    MenyDesign("Choose and write what you want to add from the list.");
-                    MenyDesign("|| Alias || Age || Email || Linkedin || FaceBook || Instagram || Twitter || Steam || Github || Favorite Food || Favorite Animal || Favorite Movie Genre || Alias || Favorite Movie ||");
-                    Console.WriteLine();
+                    MenyDesign("Choose and write what you want to add from the list. (Name and case sensitive)");
+                    for (int i = 0; i < Properties.Length; i++)
+                    {
+
+                        Console.Write(Properties[i].Name + "  ||  ");
+
+
+                    }
                     Input = Console.ReadLine();
                     MenyDesign("Enter: " + Input);
                     Input2 = Console.ReadLine();
@@ -54,13 +60,17 @@ namespace KontaktListaUppGift1337
                     for (int i = 0; i < Properties.Length; i++)
                     {
                         
-                        Console.WriteLine("Enter: " + Properties[i]);
+                        Console.Write("Enter " + Properties[i].Name + ": ");
                         Input = Console.ReadLine();
                         Properties[i].SetValue(newPerson, Input);
                         
 
                     }
 
+                }
+                else
+                {
+                    Console.WriteLine("Fel");
                 }
 
             }
