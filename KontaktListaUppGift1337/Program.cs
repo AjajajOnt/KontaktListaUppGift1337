@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace KontaktListaUppGift1337
 {
@@ -9,30 +8,33 @@ namespace KontaktListaUppGift1337
         {
             ContactList ccl = new ContactList();
             int MenuChoice = 0;
-
+            ccl.ExistingContacts();
+            ccl.ExistingContacts2();
             do
             {
-                MenuChoice = Menu();
 
+                MenuChoice = Menu();
                 if (MenuChoice == 1)
                 {
-                    ccl.start();
+                    ccl.AddNewPerson();
                 }
                 else if (MenuChoice == 2)
                 {
+                    ccl.ShowInfoOfContact();
 
                 }
                 else if (MenuChoice == 3)
                 {
+                    ccl.UpdateExistingPerson();
 
                 }
-                else if(MenuChoice == 4)
+                else if (MenuChoice == 4)
                 {
                     ccl.PrintPersonDelete();
 
 
                 }
-                else if(MenuChoice == 5)
+                else if (MenuChoice == 5)
                 {
                     ccl.PrintPerson();
 
@@ -40,7 +42,7 @@ namespace KontaktListaUppGift1337
 
 
 
-            } while (MenuChoice > 0 || MenuChoice <= 5  );
+            } while (MenuChoice > 0 || MenuChoice <= 5);
 
 
 
@@ -59,11 +61,11 @@ namespace KontaktListaUppGift1337
         {
             int MenuChoice;
             MenyDesign("To Add a new contact to your list enter 1 ");
-            MenyDesign("To Acces information about a contact enter 2");
+            MenyDesign("To Access information about a contact enter 2");
             MenyDesign("To update a certain contact enter 3");
             MenyDesign("To delete a contact enter 4");
             MenyDesign("To list everyone in your contacts enter 5");
-            try 
+            try
             {
 
 
@@ -76,16 +78,16 @@ namespace KontaktListaUppGift1337
                 return MenuChoice;
 
             }
-        
 
-            
+
+
         }
 
         private static void MenyDesign(string Text)
         {
 
             Console.WriteLine("_______________________________________________________________");
-            
+
             Console.WriteLine("");
             Console.WriteLine("          " + Text);
             Console.WriteLine("_______________________________________________________________");
