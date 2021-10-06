@@ -10,7 +10,9 @@ namespace KontaktListaUppGift1337
     {
         String Input = "";
         String Input2 = "";
+        string remove = "";
         int count = 0;
+
 
 
 
@@ -86,7 +88,6 @@ namespace KontaktListaUppGift1337
                     MenyDesign("Enter: " + Input);
                     Input2 = Console.ReadLine();
                     Input2 = CapitalizeFirstLetter(Input2);
-
                     newPerson.GetType().GetProperty(Input).SetValue(newPerson, Input2);
 
                     
@@ -122,12 +123,7 @@ namespace KontaktListaUppGift1337
         {
             Console.Clear();
             PrintContactsFristandLastName();
-            Console.WriteLine("Enter the firstname of the person you want to update");
-            Input = Console.ReadLine();
-            Input = CapitalizeFirstLetter(Input);
-            Console.WriteLine("Enter the lastname of the person you want to update");
-            Input2 = Console.ReadLine();
-            Input2 = CapitalizeFirstLetter(Input2);
+            InputFirstAndLastName();
 
             for (int i = 0; i < persons.Count; i++)
             {
@@ -145,7 +141,6 @@ namespace KontaktListaUppGift1337
                     Input = Console.ReadLine();
                     Console.Write("Enter what you want to change it to: ");
                     Input2 = Console.ReadLine();
-
                     persons[i].GetType().GetProperty(Input).SetValue(persons[i], Input2);
 
 
@@ -164,18 +159,17 @@ namespace KontaktListaUppGift1337
         {
             Console.Clear();
             PrintContactsFristandLastName();
-            Console.Write("Enter the firstname of the person you want to see details about: ");
-            Input = Console.ReadLine();
-            Input = CapitalizeFirstLetter(Input);
-            Console.Write("Enter the lastname of the person you want to see details about: ");
-            Input2 = Console.ReadLine();
-            Input2 = CapitalizeFirstLetter(Input2);
+            InputFirstAndLastName();
 
             for (int i = 0; i < persons.Count; i++)
             {
                 Console.WriteLine();
 
-                if (persons[i].Name.Contains(Input) && persons[i].LastName.Contains(Input2))
+                if (!persons[i].Name.Contains(Input) && !persons[i].LastName.Contains(Input2))
+                {
+                    Console.WriteLine("Contact does not exist");
+                }
+                else if (persons[i].Name.Contains(Input) && persons[i].LastName.Contains(Input2))
                 {
                     foreach (var prop in Properties)
                     {
@@ -187,12 +181,21 @@ namespace KontaktListaUppGift1337
                     }
 
                 }
-                
 
 
             }
 
 
+        }
+
+        private void InputFirstAndLastName()
+        {
+            Console.Write("Enter firstname: ");
+            Input = Console.ReadLine();
+            Input = CapitalizeFirstLetter(Input);
+            Console.Write("Enter lastname: ");
+            Input2 = Console.ReadLine();
+            Input2 = CapitalizeFirstLetter(Input2);
         }
 
         private void PrintContactsFristandLastName()
@@ -213,8 +216,41 @@ namespace KontaktListaUppGift1337
 
         internal void PrintPerson()
         {
+            Console.Clear();
+            Console.WriteLine("Do you want to list everyone or by filter");
+            Input = Console.ReadLine();
 
-            PrintContactsAvailableProperties();
+            if (Input.ToUpper() == "EVERYONE" || Input.ToUpper() == "ALL" || Input.ToUpper() == "EVERYONE")
+            {
+                PrintContactsFristandLastName();
+
+
+            }
+            else if(Input.ToUpper() == "FILTER")
+            {
+                
+                Console.Write("Write the first letter you want to filter names by: ");
+                Input = Console.ReadLine();
+                Input = Input.ToUpper();
+                for (int i = 0; i < persons.Count; i++)
+                {
+                    if (persons[i].Name.StartsWith(Input))
+                    {
+                        count++;
+                        Console.WriteLine("Contact: " + count);
+
+                        Console.WriteLine("\t" + persons[i].Name + " " + persons[i].LastName);
+                        Console.WriteLine();
+                    }
+
+
+
+                }
+            }
+            else
+            {
+                Console.WriteLine("Du skrev fel");
+            }
 
         }
 
@@ -241,13 +277,34 @@ namespace KontaktListaUppGift1337
             }
         }
 
-        internal void PrintPersonDelete()
+        internal void DeletePerson()
         {
-            foreach (var person in persons)
+            PrintContactsFristandLastName();
+            Console.Write("Do you want to delete a contact? ");
+            remove = Console.ReadLine();
+            if (remove.ToUpper() == "YES" || remove.ToUpper() == "Y")
             {
-                MenyDesign("Name: " + person.Name + " " + person.LastName);
-                
-                
+                Console.WriteLine();
+                InputFirstAndLastName();
+                for (int i = 0; i < persons.Count; i++)
+                {
+
+                    {
+                        if(!(persons[i].Name.Contains(Input) && persons[i].LastName.Contains(Input2)))
+                        {
+                            Console.WriteLine("Contact does not exist");
+
+                        }
+                        else if (persons[i].Name.Contains(Input) && persons[i].LastName.Contains(Input2))
+                        {
+                            persons.Remove(persons[i]);
+                            Console.WriteLine("");
+                            Console.WriteLine("Deleted");
+
+
+                        }
+                    }
+                }
 
             }
         }

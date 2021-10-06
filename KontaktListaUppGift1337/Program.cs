@@ -30,7 +30,7 @@ namespace KontaktListaUppGift1337
                 }
                 else if (MenuChoice == 4)
                 {
-                    ccl.PrintPersonDelete();
+                    ccl.DeletePerson();
 
 
                 }
