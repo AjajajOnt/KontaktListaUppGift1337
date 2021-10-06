@@ -10,6 +10,7 @@ namespace KontaktListaUppGift1337
     {
         String Input = "";
         String Input2 = "";
+        int count = 0;
 
 
 
@@ -120,11 +121,7 @@ namespace KontaktListaUppGift1337
 
         {
             Console.Clear();
-            foreach (var person in persons)
-            {
-                MenyDesign("Firstname: " + person.Name + " Lastname: " + person.LastName);
-
-            }
+            PrintContactsFristandLastName();
             Console.WriteLine("Enter the firstname of the person you want to update");
             Input = Console.ReadLine();
             Input = CapitalizeFirstLetter(Input);
@@ -136,25 +133,29 @@ namespace KontaktListaUppGift1337
             {
                 Console.WriteLine();
 
-                if (persons[i].Name.Contains(Input) && persons[i].LastName.Contains(Input2) || persons[i].LastName.Contains(null))
+                if (persons[i].Name.Contains(Input) && persons[i].LastName.Contains(Input2))
                 {
                     foreach (var prop in Properties)
                     {
                         Console.WriteLine(prop.Name + ": " + prop.GetValue(persons[i]));
 
                     }
+                    Console.WriteLine();
+                    Console.Write("Enter what you want to change (Case sensitive) : ");
+                    Input = Console.ReadLine();
+                    Console.Write("Enter what you want to change it to: ");
+                    Input2 = Console.ReadLine();
+
+                    persons[i].GetType().GetProperty(Input).SetValue(persons[i], Input2);
+
 
 
 
 
 
                 }
-
-
-
-
-
             }
+
 
 
         }
@@ -162,15 +163,11 @@ namespace KontaktListaUppGift1337
         internal void ShowInfoOfContact()
         {
             Console.Clear();
-            foreach (var person in persons)
-            {
-                MenyDesign("Firstname: " + person.Name + " Lastname: " + person.LastName);
-
-            }
-            Console.WriteLine("Enter the firstname of the person you want to see details about");
+            PrintContactsFristandLastName();
+            Console.Write("Enter the firstname of the person you want to see details about: ");
             Input = Console.ReadLine();
             Input = CapitalizeFirstLetter(Input);
-            Console.WriteLine("Enter the lastname of the person you want to see details about");
+            Console.Write("Enter the lastname of the person you want to see details about: ");
             Input2 = Console.ReadLine();
             Input2 = CapitalizeFirstLetter(Input2);
 
@@ -178,20 +175,18 @@ namespace KontaktListaUppGift1337
             {
                 Console.WriteLine();
 
-                if (persons[i].Name.Contains(Input))
+                if (persons[i].Name.Contains(Input) && persons[i].LastName.Contains(Input2))
                 {
                     foreach (var prop in Properties)
                     {
-                        Console.WriteLine(prop.Name + ": " + prop.GetValue(persons[i]));
+                        if (prop.GetValue(persons[i]) != null)
+                        {
+                            Console.WriteLine(prop.Name + ": " + prop.GetValue(persons[i]));
+                        }
 
                     }
 
-
-
-
                 }
-
-                
                 
 
 
@@ -200,37 +195,50 @@ namespace KontaktListaUppGift1337
 
         }
 
-        internal void PrintPerson()
+        private void PrintContactsFristandLastName()
         {
-            //foreach (var person in persons)
-            //{
-            //    MenyDesign("Firstname: " + person.Name + " Lastname: " + person.LastName + "Alias: " + person.Alias);
-
-            //}
             for (int i = 0; i < persons.Count; i++)
             {
+                count++;
+                Console.WriteLine("Contact: " + count);
+
+                Console.WriteLine("\t" + persons[i].Name + " " + persons[i].LastName);
+                Console.WriteLine();
+
+
+
+            }
+
+        }
+
+        internal void PrintPerson()
+        {
+
+            PrintContactsAvailableProperties();
+
+        }
+
+        private void PrintContactsAvailableProperties()
+        {
+            for (int i = 0; i < persons.Count; i++)
+            {
+                count++;
+                Console.WriteLine("Contact: " + count);
                 foreach (var prop in Properties)
                 {
-                    try 
-                    {
+
                         if (prop.GetValue(persons[i]) != null)
                         {
-                            Console.WriteLine("\t" + prop.Name + ": "  + prop.GetValue(persons[i]));
+                            Console.WriteLine("\t" + prop.Name + ": " + prop.GetValue(persons[i]));
 
                         }
-                    }
-                    catch(System.NullReferenceException)
-                    {
                         
 
-                    }
                     
 
                 }
 
             }
-
-
         }
 
         internal void PrintPersonDelete()
