@@ -38,6 +38,7 @@ namespace KontaktListaUppGift1337
             newPerson.LastName = "Number";
             newPerson.Alias = "SOS";
             newPerson.Email = "kundsupport112@sosalarm.se";
+            newPerson.Blocked = true;
             persons.Add(newPerson);
             //newPerson.Name = "SOS";
             //newPerson.Name = "SOS";
@@ -139,9 +140,25 @@ namespace KontaktListaUppGift1337
                     Console.WriteLine();
                     Console.Write("Enter what you want to change (Case sensitive) : ");
                     Input = Console.ReadLine();
+                    Input = CapitalizeFirstLetter(Input);
                     Console.Write("Enter what you want to change it to: ");
                     Input2 = Console.ReadLine();
-                    persons[i].GetType().GetProperty(Input).SetValue(persons[i], Input2);
+                    Input2 = CapitalizeFirstLetter(Input2);
+
+                    if (Input.ToUpper() == "BLOCKED")
+                    {
+                        persons[i].GetType().GetProperty(Input).SetValue(persons[i], Convert.ToBoolean(Input2));
+                    }
+                    else if (Input.ToUpper() == "GHOSTED")
+                    {
+                        persons[i].GetType().GetProperty(Input).SetValue(persons[i], Convert.ToBoolean(Input2));
+
+                    }
+                    else
+                    {
+                        persons[i].GetType().GetProperty(Input).SetValue(persons[i], Input2);
+                    }
+                     
 
 
 

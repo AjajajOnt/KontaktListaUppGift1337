@@ -25,9 +25,8 @@ namespace KontaktListaUppGift1337
         public string FavoritAnimal { get; set; }
         public string FavoriteMovieGenre { get; set; }
         public string FavoriteMovie{ get; set; }
-
-        // public bool blocked = false;
-        // public bool ghosted = false;
+        public bool Blocked{ get; set; }
+        public bool Ghosted{ get; set; }
 
     }
 }
