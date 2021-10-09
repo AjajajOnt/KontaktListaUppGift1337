@@ -23,19 +23,21 @@ namespace KontaktListaUppGift1337
                 LastName = "Ned",
                 Alias = "KN",
                 Email = "KimNed1994@hotmail.com",
-                BirthDay = Convert.ToDateTime("1992-09-01")
+                BirthDay = Convert.ToDateTime("1992-09-01"),
+                Ghosted = true
             };
             persons.Add(newPerson);
         }
 
         internal void ExistingContacts()
         {
-            Person newPerson = new Person
-            {
-                Name = "Emergency",
-                LastName = "Number",
-                Alias = "SOS",
-                Email = "kundsupport112@sosalarm.se",
+        Person newPerson = new Person
+        {
+            Name = "Emergency",
+            LastName = "Number",
+            Alias = "SOS",
+            Email = "kundsupport112@sosalarm.se",
+            Blocked = true
             };
             persons.Add(newPerson);
             //newPerson.Name = "SOS";
@@ -70,6 +72,11 @@ namespace KontaktListaUppGift1337
                     Console.Write("Enter Lastname: ");
                     newPerson.LastName = Console.ReadLine();
                     newPerson.LastName = CapitalizeFirstLetter(newPerson.LastName);
+                    Console.Write("Enter Alias: ");
+                    newPerson.Alias = Console.ReadLine();
+                    newPerson.Alias = CapitalizeFirstLetter(newPerson.Alias);
+                    Console.WriteLine("Please enter your date of birth in the format of YYYY-MM-DD.");
+                    newPerson.BirthDay = Convert.ToDateTime(Console.ReadLine());
 
                 }
                 else if (Input.ToUpper() == "EVERYTHING")
@@ -280,7 +287,7 @@ namespace KontaktListaUppGift1337
                 Console.WriteLine("");
                 Console.WriteLine("Enter firstletter or blocked or ghosted to choose the filter you want.");
                 InputCapitalLetter();
-                if (Input.ToUpper() == "FiRSTLETTER")
+                if (Input.ToUpper() == "FIRSTLETTER")
                     {
                     Console.Write("Write the first letter you want to filter names by: ");
                     Input = Console.ReadLine();
@@ -306,12 +313,47 @@ namespace KontaktListaUppGift1337
                 }
                 else if(Input.ToUpper() == "GHOSTED")
                 {
-                    PressAnything();
+                    for (int i = 0; i < persons.Count; i++)
+                    {
+                        
+                        
+                            if(persons[i].Ghosted.ToString() == "True" )
+                            {
+                            Console.Clear();
+                                Console.WriteLine("These people are ghosted.");
+                            Console.WriteLine("");
+                            MenyDesign("Firstname: " + persons[i].Name + " " + "Lastname: " + persons[i].LastName);
+                            SomethingHappened = true;
 
+
+                        }
+
+                        
+
+                    }
+
+                    
                 }
                 else if(Input.ToUpper() == "BLOCKED")
                 {
-                    PressAnything();
+                    for (int i = 0; i < persons.Count; i++)
+                    {
+
+
+                        if (persons[i].Blocked.ToString() == "True")
+                        {
+                            Console.Clear();
+                            Console.WriteLine("These people are blocked.");
+                            Console.WriteLine("");
+                            MenyDesign("Firstname: " + persons[i].Name + " " + "Lastname: " + persons[i].LastName);
+                            SomethingHappened = true;
+
+
+                        }
+
+
+
+                    }
 
                 }
 
