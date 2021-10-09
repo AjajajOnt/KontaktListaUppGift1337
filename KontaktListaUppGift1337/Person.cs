@@ -6,14 +6,27 @@ using System.Threading.Tasks;
 
 namespace KontaktListaUppGift1337
 {
+
     public class Person
     {
+        private int age;
 
 
         public string Name { get; internal set; }
         public string LastName { get; set; }
         public string Alias { get; set; }
-        public string Age { get; set; }
+        public DateTime BirthDay { get; set; }
+        public int Age
+        {
+            get { return age; }
+            set
+            {
+                age = DateTime.Today.Year - BirthDay.Year;
+            }
+            
+                
+            
+        }
         public string Email { get; set; }
         public string Linkedin { get; set; }
         public string Facebook { get; set; }
@@ -22,6 +35,7 @@ namespace KontaktListaUppGift1337
         public string Steam { get; set; }
         public string Github { get; set; }
         public string FavoriteFood { get; set; }
+        public string FoodDoesNotLike { get; set; }
         public string FavoritAnimal { get; set; }
         public string FavoriteMovieGenre { get; set; }
         public string FavoriteMovie{ get; set; }
