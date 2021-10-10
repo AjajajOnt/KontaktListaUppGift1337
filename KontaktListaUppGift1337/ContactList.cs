@@ -37,6 +37,7 @@ namespace KontaktListaUppGift1337
                 LastName = "Number",
                 Alias = "SOS",
                 Email = "kundsupport112@sosalarm.se",
+                BirthDay = Convert.ToDateTime("1200-01-01"),
                 Blocked = true
             };
             Persons.Add(newPerson);
