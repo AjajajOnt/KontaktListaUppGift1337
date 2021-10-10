@@ -1,32 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace KontaktListaUppGift1337
 {
-
     public class Person
     {
         private int age;
-
 
         public string Name { get; internal set; }
         public string LastName { get; set; }
         public string Alias { get; set; }
         public DateTime BirthDay { get; set; }
+
         public int Age
         {
-            get { return age; }
-            set
-            {
-                age = DateTime.Today.Year - BirthDay.Year;
-            }
-            
-                
-            
+            get => age;
+            set => age = DateTime.Today.Year - BirthDay.Year;
         }
+
         public string Email { get; set; }
         public string Linkedin { get; set; }
         public string Facebook { get; set; }
@@ -38,9 +28,8 @@ namespace KontaktListaUppGift1337
         public string FoodDoesNotLike { get; set; }
         public string FavoritAnimal { get; set; }
         public string FavoriteMovieGenre { get; set; }
-        public string FavoriteMovie{ get; set; }
-        public bool Blocked{ get; set; }
-        public bool Ghosted{ get; set; }
-
+        public string FavoriteMovie { get; set; }
+        public bool Blocked { get; set; }
+        public bool Ghosted { get; set; }
     }
 }

@@ -17,12 +17,11 @@ namespace KontaktListaUppGift1337
                 {
                     MenuChoice = int.Parse(Console.ReadLine());
                 }
-                catch(SystemException)
+                catch (SystemException)
                 {
                     Console.Clear();
                     Console.WriteLine("Wrong input");
                     MenuChoice = 0;
-
                 }
 
                 if (MenuChoice == 1)
@@ -32,27 +31,20 @@ namespace KontaktListaUppGift1337
                 else if (MenuChoice == 2)
                 {
                     ccl.ShowInfoOfContact();
-
                 }
                 else if (MenuChoice == 3)
                 {
                     ccl.UpdateExistingPerson();
-
                 }
                 else if (MenuChoice == 4)
                 {
                     ccl.DeletePerson();
-
-
                 }
                 else if (MenuChoice == 5)
                 {
                     ccl.PrintPerson();
-
                 }
             } while (MenuChoice > 0 || MenuChoice <= 5);
-
-
         }
     }
 }
