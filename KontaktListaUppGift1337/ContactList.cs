@@ -79,24 +79,25 @@ namespace KontaktListaUppGift1337
                     Input2 = "2020-01-01";
                     while (Input2 == "2020-01-01")
                     {
-                        
+                        Console.WriteLine("Please enter your date of birth in the format of YYYY-MM-DD.");
                         try
                         {
-                            Console.WriteLine("Please enter your date of birth in the format of YYYY-MM-DD.");
+                            
                             newPerson.BirthDay = Convert.ToDateTime(Console.ReadLine());
-
+                            Input2 = newPerson.BirthDay.ToString();
 
 
 
                         }
                         catch (FormatException)
                         {
+                            Input2 = "2020-01-01";
                             if (Input2 == "2020-01-01")
                             {
                                 Console.Clear();
                                 Console.WriteLine("Wrong format, try again");
                             
-                            Input2 = "2020-01-01";
+                            
                             }
 
 
@@ -167,7 +168,7 @@ namespace KontaktListaUppGift1337
                     InputCapitalLetter();
                     Input2 = "2020-01-01";
                     if (Input.ToUpper() == "BIRTHDAY")
-                        
+
                     {
                         while (Input2 == "2020-01-01")
                         {
@@ -188,11 +189,11 @@ namespace KontaktListaUppGift1337
                                     Console.Clear();
                                     Console.WriteLine("Wrong format, try again");
 
-                                    
+
                                 }
                             }
                         }
-                        
+
                         SomethingHappened = true;
 
                     }
@@ -203,29 +204,8 @@ namespace KontaktListaUppGift1337
                     }
 
 
-                        if (Input.ToUpper() == "BLOCKED")
-                        {
-                        SomethingHappened = true;
-                        try
-                        {
-                            Persons[i].GetType().GetProperty(Input).SetValue(Persons[i], Convert.ToBoolean(Input2));
-                        }
-
-                        
-
-                        catch (SystemException)
-                        {
-                            Input2 = "false";
-                            SomethingHappened = false;
-
-                        }
-                            
-                        }
-
-
-
-                        else if (Input.ToUpper() == "GHOSTED")
-                        {
+                    if (Input.ToUpper() == "BLOCKED")
+                    {
                         SomethingHappened = true;
                         try
                         {
@@ -241,7 +221,28 @@ namespace KontaktListaUppGift1337
 
                         }
 
+                    }
+
+
+
+                    else if (Input.ToUpper() == "GHOSTED")
+                    {
+                        SomethingHappened = true;
+                        try
+                        {
+                            Persons[i].GetType().GetProperty(Input).SetValue(Persons[i], Convert.ToBoolean(Input2));
                         }
+
+
+
+                        catch (SystemException)
+                        {
+                            Input2 = "false";
+                            SomethingHappened = false;
+
+                        }
+
+                    }
 
 
 
@@ -249,14 +250,14 @@ namespace KontaktListaUppGift1337
                     else if (Persons[i].GetType().GetProperty(Input) == null)
                     {
 
-                            
-                            
-                                Input = "Steam";
+
+
+                        Input = "Steam";
 
 
 
-                            
-                            Persons[i].GetType().GetProperty(Input).SetValue(Persons[i], Input2);
+
+                        Persons[i].GetType().GetProperty(Input).SetValue(Persons[i], Input2);
 
 
                         Console.WriteLine("");
@@ -264,18 +265,21 @@ namespace KontaktListaUppGift1337
                         SomethingHappened = true;
 
                     }
-                        else
+                    else
                     {
-                        if(!(SomethingHappened = true))
+                        if (!(SomethingHappened = true))
                         {
                             Persons[i].GetType().GetProperty(Input).SetValue(Persons[i], Input2);
                             SomethingHappened = true;
                         }
-                        
-                        
+
+
                     }
                 }
             }
+
+            UpdatedTo();
+
             WrongInput();
             PressAnything();
         }
@@ -318,115 +322,137 @@ namespace KontaktListaUppGift1337
         }
         internal void PrintPerson()
         {
-            Console.Clear();
-            Console.WriteLine("Do you want to list everyone or with a filter");
-            Input = Console.ReadLine();
-
-            if (Input.ToUpper() == "EVERYONE" || Input.ToUpper() == "ALL" || Input.ToUpper() == "EVERYONE")
-            {
-                PrintContactsFristandLastName();
-                
-                SomethingHappened = true;
-
-            }
-            else if (Input.ToUpper() == "FILTER")
-            {
-                Console.WriteLine("Filter by the first letter, blocked, ghosted or birthday this month");
-                Console.WriteLine("");
-                Console.WriteLine("Enter firstletter or blocked or ghosted or birthday to choose the filter you want.");
-                InputCapitalLetter();
-                if (Input.ToUpper() == "FIRSTLETTER")
-                    {
-                    Console.Write("Write the first letter you want to filter names by: ");
-                    Input = Console.ReadLine();
-                    Input = Input.ToUpper();
-
-                    for (int i = 0; i < Persons.Count; i++)
-                    {
-                        if (Persons[i].Name.StartsWith(Input))
-                        {
-                            Count++;
-                            Console.WriteLine("Contact: " + Count);
-                            Persons[i].Age = DateTime.Today.Year - Persons[i].BirthDay.Year;
-                            Console.WriteLine("\t" + Persons[i].Name + " " + Persons[i].LastName);
-                            Console.WriteLine();
-
-                        }
+            
+            
+                Console.Clear();
+                Console.WriteLine("Do you want to list everyone or with a filter(Filter by firstletter, blocked or ghosted users and birthday this month)");
+                Console.Write("Enter \"filter\" or \"everyone\": ");
+                Input = Console.ReadLine();
 
 
-
-                        SomethingHappened = true;
-
-                    }
-                }
-                else if(Input.ToUpper() == "GHOSTED")
+                if (Input.ToUpper() == "EVERYONE" || Input.ToUpper() == "ALL" || Input.ToUpper() == "EVERYONE")
                 {
-                    for (int i = 0; i < Persons.Count; i++)
+                    PrintContactsFristandLastName();
+
+                    SomethingHappened = true;
+
+                }
+                else if (Input.ToUpper() == "FILTER")
+                {
+                    Console.Clear();
+                    Console.WriteLine("Filter by the first letter, blocked, ghosted or birthday this month");
+                    Console.WriteLine("");
+                    Console.Write("Enter \"firstletter\" or \"blocked\" or \"ghosted\" or \"birthday\" to choose the filter you want: ");
+                    InputCapitalLetter();
+                    if (Input.ToUpper() == "FIRSTLETTER")
                     {
-                        
-                        
-                            if(Persons[i].Ghosted.ToString() == "True" )
+                        Console.Write("Write the first letter you want to filter names by: ");
+                        Input = Console.ReadLine();
+                        Input = Input.ToUpper();
+
+                        for (int i = 0; i < Persons.Count; i++)
+                        {
+                            if (Persons[i].Name.StartsWith(Input))
                             {
-                            Console.Clear();
-                                Console.WriteLine("These people are ghosted.");
-                            Console.WriteLine("");
-                            MenyDesign("Firstname: " + Persons[i].Name + " " + "Lastname: " + Persons[i].LastName);
+                                Count++;
+                                Console.WriteLine("Contact: " + Count);
+                                Persons[i].Age = DateTime.Today.Year - Persons[i].BirthDay.Year;
+                                Console.WriteLine("\t" + Persons[i].Name + " " + Persons[i].LastName);
+                                Console.WriteLine();
+
+                            }
+
+
+
                             SomethingHappened = true;
+
+                        }
+                    }
+                    else if (Input.ToUpper() == "GHOSTED")
+                    {
+                        for (int i = 0; i < Persons.Count; i++)
+                        {
+
+
+                            if (Persons[i].Ghosted.ToString() == "True")
+                            {
+                                Console.Clear();
+                                Console.WriteLine("These people are ghosted.");
+                                Console.WriteLine("");
+                                MenyDesign("Firstname: " + Persons[i].Name + " " + "Lastname: " + Persons[i].LastName);
+                                SomethingHappened = true;
+
+
+                            }
+
 
 
                         }
 
+
+                    }
+                    else if (Input.ToUpper() == "BLOCKED")
+                    {
+                        for (int i = 0; i < Persons.Count; i++)
+                        {
+
+
+                            if (Persons[i].Blocked.ToString() == "True")
+                            {
+                                Console.Clear();
+                                Console.WriteLine("These people are blocked.");
+                                Console.WriteLine("");
+                                MenyDesign("Firstname: " + Persons[i].Name + " " + "Lastname: " + Persons[i].LastName);
+                                SomethingHappened = true;
+
+
+                            }
+
+
+
+                        }
+
+                    }
+                    else if (Input.ToUpper() == "BIRTHDAY")
+                    {
+                        for (int i = 0; i < Persons.Count; i++)
+                        {
+                            if (Persons[i].BirthDay.Month == DateTime.Now.Month)
+                            {
+                                Console.Clear();
+                                Console.WriteLine("These people have a birthday this month.");
+                                Console.WriteLine("");
+                                MenyDesign("Firstname: " + Persons[i].Name + " " + "Lastname: " + Persons[i].LastName);
+                                SomethingHappened = true;
+
+                            }
+
+                        }
+
+                    }
+                    else if(Input.ToUpper() == "EXIT")
+                    {
+                        
+                        
+                            SomethingHappened = true;
+
+                        
+                    }
+                    else
+                    {
                         
 
                     }
 
-                    
-                }
-                else if(Input.ToUpper() == "BLOCKED")
-                {
-                    for (int i = 0; i < Persons.Count; i++)
-                    {
 
 
-                        if (Persons[i].Blocked.ToString() == "True")
-                        {
-                            Console.Clear();
-                            Console.WriteLine("These people are blocked.");
-                            Console.WriteLine("");
-                            MenyDesign("Firstname: " + Persons[i].Name + " " + "Lastname: " + Persons[i].LastName);
-                            SomethingHappened = true;
-
-
-                        }
-
-
-
-                    }
-
-                }
-                else if (Input.ToUpper() == "BIRTHDAY")
-                {
-                    for (int i = 0; i < Persons.Count; i++)
-                    {
-                        if (Persons[i].BirthDay.Month == DateTime.Now.Month)
-                        {
-                            Console.Clear();
-                            Console.WriteLine("These people have a birthday this month.");
-                            Console.WriteLine("");
-                            MenyDesign("Firstname: " + Persons[i].Name + " " + "Lastname: " + Persons[i].LastName);
-                            SomethingHappened = true;
-
-                        }
-
-                    }
 
                 }
 
-
-            }
-
-            WrongInput();
-            PressAnything();
+                WrongInput();
+                PressAnything();
+            
+            
 
         }
 
@@ -434,11 +460,14 @@ namespace KontaktListaUppGift1337
 
         internal void DeletePerson()
         {
-            PrintContactsFristandLastName();
-            Console.Write("Do you want to delete a contact? ");
-            Remove = Console.ReadLine();
-            if (Remove.ToUpper() == "YES" || Remove.ToUpper() == "Y")
+            do
             {
+                Console.Clear();
+                PrintContactsFristandLastName();
+                Console.Write("Do you want to delete a contact? (Y/N) ");
+                Remove = Console.ReadLine();
+                if (Remove.ToUpper() == "YES" || Remove.ToUpper() == "Y")
+                {
 
                     Console.WriteLine();
                     InputFirstAndLastName();
@@ -451,31 +480,42 @@ namespace KontaktListaUppGift1337
 
                                 Persons.Remove(Persons[i]);
                                 Console.WriteLine("");
-                                Console.WriteLine("Deleted");
+                                Console.WriteLine("Deleted contact " + Input + " " + Input2);
                                 SomethingHappened = true;
+                                PressAnything();
 
                             }
                         }
                     }
-                if (SomethingHappened == false && Remove.ToUpper() == "YES" || Remove.ToUpper() == "Y")
-                {
-                    Console.WriteLine("");
-                    Console.WriteLine("Wrong input");
+                    if (SomethingHappened == false && Remove.ToUpper() == "YES" || Remove.ToUpper() == "Y")
+                    {
+                        Console.WriteLine("");
+                        Console.WriteLine("Wrong input try again");
+                        PressAnything();
+                    }
+                    SomethingHappened = false;
+
+
                 }
-                SomethingHappened = false;
+                else if (Remove.ToUpper() == "NO" || Remove.ToUpper() == "N")
+                {
+                    Console.Clear();
+                    Console.WriteLine();
+                    Console.WriteLine("Did you enter the wrong menu?");
+                    PressAnything();
+                }
+                else
+                {
 
+                    Console.WriteLine("Wrong input");
+                    Remove = "YES";
+                    PressAnything();
+                }
+                
+            }
+            while (SomethingHappened == false && Remove.ToUpper() == "YES");
 
-            }
-            else if (Remove.ToUpper() == "NO" || Remove.ToUpper() == "N")
-            {
-                Console.WriteLine();
-                Console.WriteLine("Did you enter the wrong menu?");
-            }
-            else
-            {
-                Console.WriteLine("Wrong input");
-            }
-            PressAnything();
+            
         }
         private void PrintContactsAvailableProperties()
         {
@@ -584,10 +624,18 @@ namespace KontaktListaUppGift1337
         {
             if (SomethingHappened == false)
             {
-                Console.WriteLine("Wrong input");
+                Console.WriteLine("Wrong input try again");
 
             }
             SomethingHappened = false;
+        }
+        private void UpdatedTo()
+        {
+            if (SomethingHappened == true)
+            {
+                MenyDesign(Input + " Updated to " + Input2);
+
+            }
         }
 
         private void InputCapitalLetter()
